@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 
@@ -21,10 +23,11 @@ use App\Http\Controllers\PostsController;
                  //CRUD OPERATIONS for work with posts//
 
 
-Route::group(['middleware'=>'web'],function(){
-
-    Route::resource('/posts',PostsController::class);
-
-});
 
 
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/newuser',[UsersController::class,'store'])->name('store');
